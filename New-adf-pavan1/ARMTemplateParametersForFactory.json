@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "New-adf-pavan1"
+		},
+		"LS_dwh_connectionString": {
+			"value": ""
+		},
+		"LS_fusion_connectionString": {
+			"value": ""
+		},
+		"ADF_key_valut_properties_typeProperties_baseUrl": {
+			"value": "https://key-valut-adf.vault.azure.net/"
+		},
+		"ADLS_Gen2_fusion_properties_typeProperties_url": {
+			"value": "@{concat('https://adlsfusion',linkedService().environment,'.dfs.core.windows.net/')}"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "@{concat(linkedService().Server_Name_dwh,'.database.windows.net')}"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "@{linkedService().db_name_dwh}"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "@{linkedService().db_username}"
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"value": "https://jsonplaceholder.typicode.com"
+		},
+		"LS_dummyJson_properties_typeProperties_url": {
+			"value": "https://dummyjson.com/products"
+		},
+		"Ls_JsonPlaceHolder_properties_typeProperties_url": {
+			"value": "https://jsonplaceholder.typicode.com/"
+		},
+		"azure_Dev_db_properties_typeProperties_server": {
+			"value": "sql-bd-dev-server.database.windows.net"
+		},
+		"azure_Dev_db_properties_typeProperties_database": {
+			"value": "db_dev"
+		},
+		"azure_Dev_db_properties_typeProperties_userName": {
+			"value": "pavanbd_dev"
+		}
+	}
+}

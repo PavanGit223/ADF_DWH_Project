@@ -1,0 +1,26 @@
+{
+	"Server_Name_dwh": {
+		"type": "string",
+		"value": "sql-bd-dev-server"
+	},
+	"db_name_dwh": {
+		"type": "string",
+		"value": "db_dev"
+	},
+	"key_secret_dwh": {
+		"type": "string",
+		"value": "key-valut-adf"
+	},
+	"db_username": {
+		"type": "string",
+		"value": "pavanbd_dev"
+	},
+	"key_version": {
+		"type": "string",
+		"value": "fb2e8c43e5be40d7975a9bf22d16f294"
+	},
+	"environment": {
+		"type": "string",
+		"value": "prod"
+	}
+}
