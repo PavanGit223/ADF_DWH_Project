@@ -21,6 +21,10 @@
 			"key_version": {
 				"type": "string",
 				"value": "fb2e8c43e5be40d7975a9bf22d16f294"
+			},
+			"environment": {
+				"type": "string",
+				"value": "dev"
 			}
 		}
 	},
