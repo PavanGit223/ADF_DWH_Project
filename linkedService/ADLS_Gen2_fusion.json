@@ -1,0 +1,32 @@
+{
+	"name": "ADLS_Gen2_fusion",
+	"properties": {
+		"parameters": {
+			"adls_fusion_account_name": {
+				"type": "String",
+				"defaultValue": "dev"
+			},
+			"environment": {
+				"type": "String",
+				"defaultValue": "dev"
+			}
+		},
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "@{concat('https://adlsfusion',linkedService().environment,'.dfs.core.windows.net/')}",
+			"accountKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ADF_key_valut",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": {
+					"value": "@concat('secret-adls-fusion-',linkedService().environment)",
+					"type": "Expression"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
+}
