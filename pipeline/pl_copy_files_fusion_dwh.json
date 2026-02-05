@@ -50,7 +50,13 @@
 				"inputs": [
 					{
 						"referenceName": "Ds_fusion_input",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"environment": {
+								"value": "@pipeline().globalParameters.environment",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [

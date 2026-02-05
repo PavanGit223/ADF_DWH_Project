@@ -5,8 +5,19 @@
 			"referenceName": "ADLS_Gen2_fusion",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"adls_fusion_account_name": "dec",
-				"environment": "dev"
+				"adls_fusion_account_name": {
+					"value": "@dataset().environment",
+					"type": "Expression"
+				},
+				"environment": {
+					"value": "@dataset().environment",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"environment": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
