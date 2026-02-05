@@ -1,0 +1,27 @@
+{
+	"name": "Ds_fusion_input",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLS_Gen2_fusion",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"adls_fusion_account_name": "dec",
+				"environment": "dev"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "employee_data.csv",
+				"fileSystem": "input-data-files"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
