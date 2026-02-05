@@ -1,0 +1,24 @@
+{
+	"name": "Ds_Json_PlaceHolder_api",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Ls_JsonPlaceHolder",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Relative_URL": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "@dataset().Relative_URL",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

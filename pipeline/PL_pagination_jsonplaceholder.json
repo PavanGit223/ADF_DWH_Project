@@ -1,0 +1,317 @@
+{
+	"name": "PL_pagination_jsonplaceholder",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"paginationRules": {
+							"QueryParameters.skip": "RANGE:0:100:10"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['id']"
+								},
+								"sink": {
+									"name": "id"
+								}
+							},
+							{
+								"source": {
+									"path": "['title']"
+								},
+								"sink": {
+									"name": "title"
+								}
+							},
+							{
+								"source": {
+									"path": "['description']"
+								},
+								"sink": {
+									"name": "description"
+								}
+							},
+							{
+								"source": {
+									"path": "['category']"
+								},
+								"sink": {
+									"name": "category"
+								}
+							},
+							{
+								"source": {
+									"path": "['price']"
+								},
+								"sink": {
+									"name": "price"
+								}
+							},
+							{
+								"source": {
+									"path": "['discountPercentage']"
+								},
+								"sink": {
+									"name": "discountPercentage"
+								}
+							},
+							{
+								"source": {
+									"path": "['rating']"
+								},
+								"sink": {
+									"name": "product_ragting"
+								}
+							},
+							{
+								"source": {
+									"path": "['stock']"
+								},
+								"sink": {
+									"name": "stock"
+								}
+							},
+							{
+								"source": {
+									"path": "['brand']"
+								},
+								"sink": {
+									"name": "brand"
+								}
+							},
+							{
+								"source": {
+									"path": "['sku']"
+								},
+								"sink": {
+									"name": "sku"
+								}
+							},
+							{
+								"source": {
+									"path": "['weight']"
+								},
+								"sink": {
+									"name": "weight"
+								}
+							},
+							{
+								"source": {
+									"path": "['dimensions']['width']"
+								},
+								"sink": {
+									"name": "width"
+								}
+							},
+							{
+								"source": {
+									"path": "['dimensions']['height']"
+								},
+								"sink": {
+									"name": "height"
+								}
+							},
+							{
+								"source": {
+									"path": "['dimensions']['depth']"
+								},
+								"sink": {
+									"name": "depth"
+								}
+							},
+							{
+								"source": {
+									"path": "['warrantyInformation']"
+								},
+								"sink": {
+									"name": "warrantyInformation"
+								}
+							},
+							{
+								"source": {
+									"path": "['shippingInformation']"
+								},
+								"sink": {
+									"name": "shippingInformation"
+								}
+							},
+							{
+								"source": {
+									"path": "['availabilityStatus']"
+								},
+								"sink": {
+									"name": "availabilityStatus"
+								}
+							},
+							{
+								"source": {
+									"path": "['returnPolicy']"
+								},
+								"sink": {
+									"name": "returnPolicy"
+								}
+							},
+							{
+								"source": {
+									"path": "['minimumOrderQuantity']"
+								},
+								"sink": {
+									"name": "minimumOrderQuantity"
+								}
+							},
+							{
+								"source": {
+									"path": "['meta']['createdAt']"
+								},
+								"sink": {
+									"name": "createdAt"
+								}
+							},
+							{
+								"source": {
+									"path": "['meta']['updatedAt']"
+								},
+								"sink": {
+									"name": "updatedAt"
+								}
+							},
+							{
+								"source": {
+									"path": "['meta']['barcode']"
+								},
+								"sink": {
+									"name": "barcode"
+								}
+							},
+							{
+								"source": {
+									"path": "['meta']['qrCode']"
+								},
+								"sink": {
+									"name": "qrCode"
+								}
+							},
+							{
+								"source": {
+									"path": "['thumbnail']"
+								},
+								"sink": {
+									"name": "thumbnail"
+								}
+							},
+							{
+								"source": {
+									"path": "tags"
+								},
+								"sink": {
+									"name": "product_tags",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "reviews"
+								},
+								"sink": {
+									"name": "reviews",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "images"
+								},
+								"sink": {
+									"name": "images",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['total']"
+								},
+								"sink": {
+									"name": "total"
+								}
+							},
+							{
+								"source": {
+									"path": "$['skip']"
+								},
+								"sink": {
+									"name": "skip"
+								}
+							},
+							{
+								"source": {
+									"path": "$['limit']"
+								},
+								"sink": {
+									"name": "limit"
+								}
+							}
+						],
+						"collectionReference": "$.products",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Ds_dummyJson",
+						"type": "DatasetReference",
+						"parameters": {
+							"Relative_url_dummyjson": "?limit=10"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_input_dwh",
+						"type": "DatasetReference",
+						"parameters": {
+							"File_name_fusion": "dummyJson.csv"
+						}
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "API_based_data_load"
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-02-03T19:42:13Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

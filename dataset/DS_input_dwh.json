@@ -1,0 +1,32 @@
+{
+	"name": "DS_input_dwh",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_dwh",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"File_name_fusion": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().File_name_fusion",
+					"type": "Expression"
+				},
+				"container": "dwh-input"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

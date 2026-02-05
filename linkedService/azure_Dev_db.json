@@ -1,0 +1,25 @@
+{
+	"name": "azure_Dev_db",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "sql-bd-dev-server.database.windows.net",
+			"database": "db_dev",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "pavanbd_dev",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ADF_key_valut",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "key-valut-adf",
+				"secretVersion": "fb2e8c43e5be40d7975a9bf22d16f294"
+			}
+		}
+	}
+}

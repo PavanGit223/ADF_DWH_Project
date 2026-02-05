@@ -1,0 +1,45 @@
+{
+	"name": "pl_dataflow_unique_records",
+	"properties": {
+		"activities": [
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "DF_unique_rec",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"source1": {
+								"File_name_fusion": "employee_data.csv"
+							},
+							"source2": {
+								"File_name_fusion": "employee_data.csv"
+							},
+							"sink1": {
+								"File_name_fusion": "unique_rows"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-01-30T12:23:55Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

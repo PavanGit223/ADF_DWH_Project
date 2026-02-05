@@ -1,0 +1,90 @@
+{
+	"name": "DF_Api_todos",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_bd_dev_p",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_bd_dev_p",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "parse1"
+				},
+				{
+					"name": "flatten1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          api_name as string,",
+				"          api_output as string,",
+				"          api_status as integer,",
+				"          wh_updated_date as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     limit: 100,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     query: 'select * from pre_stg_api_load\\n',",
+				"     format: 'query',",
+				"     partitionBy('hash', 2,",
+				"          ERROR_FUNCTION('')",
+				"     )) ~> source1",
+				"source1 parse(api_payload = api_output ? (userId as string,",
+				"          id as integer,",
+				"          title as string,",
+				"          completed as string,",
+				"          ADFHttpStatusCodeInResponse as integer,",
+				"          ADFWebActivityResponseHeaders as string),",
+				"     partitionBy('roundRobin', 2),",
+				"     format: 'json',",
+				"     documentForm: 'singleDocument') ~> parse1",
+				"parse1 foldDown(unroll(),",
+				"     mapColumn(",
+				"          api_name,",
+				"          api_output,",
+				"          api_status,",
+				"          wh_updated_date",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"parse1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          api_name,",
+				"          api_output,",
+				"          api_status,",
+				"          wh_updated_date",
+				"     ),",
+				"     partitionBy('hash', 2,",
+				"          ERROR_FUNCTION('')",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}

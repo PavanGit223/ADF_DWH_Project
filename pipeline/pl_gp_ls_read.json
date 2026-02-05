@@ -1,0 +1,88 @@
+{
+	"name": "pl_gp_ls_read",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "select * from stg_file_table_mapping",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Ds_db_ls_p",
+						"type": "DatasetReference",
+						"parameters": {
+							"Server_Name_dwh": {
+								"value": "@pipeline().globalParameters.Server_Name_dwh",
+								"type": "Expression"
+							},
+							"db_name_dwh": {
+								"value": "@pipeline().globalParameters.db_name_dwh",
+								"type": "Expression"
+							},
+							"key_secret_dwh": {
+								"value": "@pipeline().globalParameters.key_secret_dwh",
+								"type": "Expression"
+							},
+							"db_username": {
+								"value": "@pipeline().globalParameters.db_username",
+								"type": "Expression"
+							},
+							"key_version": {
+								"value": "@pipeline().globalParameters.key_version",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_fuison_p",
+						"type": "DatasetReference",
+						"parameters": {
+							"File_name": "sample_output"
+						}
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-01-28T17:25:38Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

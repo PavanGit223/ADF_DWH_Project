@@ -1,0 +1,33 @@
+{
+	"name": "New-adf-pavan1",
+	"properties": {
+		"globalParameters": {
+			"Server_Name_dwh": {
+				"type": "string",
+				"value": "sql-bd-dev-server"
+			},
+			"db_name_dwh": {
+				"type": "string",
+				"value": "db_dev"
+			},
+			"key_secret_dwh": {
+				"type": "string",
+				"value": "key-valut-adf"
+			},
+			"db_username": {
+				"type": "string",
+				"value": "pavanbd_dev"
+			},
+			"key_version": {
+				"type": "string",
+				"value": "fb2e8c43e5be40d7975a9bf22d16f294"
+			}
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "85a80f46-3fb8-47e5-b2cf-06521804aad2",
+		"tenantId": "3c13dc1d-b29c-4c7e-a306-b3febdd8f92e"
+	}
+}

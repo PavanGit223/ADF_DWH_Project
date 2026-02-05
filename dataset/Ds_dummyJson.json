@@ -1,0 +1,24 @@
+{
+	"name": "Ds_dummyJson",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_dummyJson",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Relative_url_dummyjson": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "@dataset().Relative_url_dummyjson",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

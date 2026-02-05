@@ -1,0 +1,33 @@
+{
+	"name": "DS_input_fusion",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_fusion",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"File_name": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().File_name",
+					"type": "Expression"
+				},
+				"folderPath": "Fusion_input",
+				"container": "fusion-input-container"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

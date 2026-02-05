@@ -1,0 +1,56 @@
+{
+	"name": "Ds_db_ls_p",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"Server_Name_dwh": {
+					"value": "@dataset().Server_Name_dwh",
+					"type": "Expression"
+				},
+				"db_name_dwh": {
+					"value": "@dataset().db_name_dwh",
+					"type": "Expression"
+				},
+				"key_secret_dwh": {
+					"value": "@dataset().key_secret_dwh",
+					"type": "Expression"
+				},
+				"db_username": {
+					"value": "@dataset().db_username",
+					"type": "Expression"
+				},
+				"key_version": {
+					"value": "@dataset().key_version",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"Server_Name_dwh": {
+				"type": "String"
+			},
+			"db_name_dwh": {
+				"type": "String"
+			},
+			"key_secret_dwh": {
+				"type": "String"
+			},
+			"db_username": {
+				"type": "String"
+			},
+			"key_version": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "",
+			"table": "Pre_stg_employee_data"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
