@@ -24,7 +24,7 @@
 			},
 			"environment": {
 				"type": "string",
-				"value": "dev"
+				"value": "prod"
 			}
 		}
 	},
