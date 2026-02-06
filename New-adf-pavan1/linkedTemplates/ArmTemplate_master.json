@@ -59,6 +59,10 @@
 			"type": "string",
 			"defaultValue": "pavanbd_dev"
 		},
+		"ls_fusion_input_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsfusiondev.dfs.core.windows.net/"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -124,6 +128,9 @@
 					},
 					"azure_Dev_db_properties_typeProperties_userName": {
 						"value": "[parameters('azure_Dev_db_properties_typeProperties_userName')]"
+					},
+					"ls_fusion_input_properties_typeProperties_url": {
+						"value": "[parameters('ls_fusion_input_properties_typeProperties_url')]"
 					}
 				}
 			},

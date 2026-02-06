@@ -44,6 +44,9 @@
 		"azure_Dev_db_properties_typeProperties_userName": {
 			"value": "pavanbd_dev"
 		},
+		"ls_fusion_input_properties_typeProperties_url": {
+			"value": "https://adlsfusiondev.dfs.core.windows.net/"
+		},
 		"containerUri": {
 			"value": ""
 		},

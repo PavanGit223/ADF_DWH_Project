@@ -58,6 +58,10 @@
 		"azure_Dev_db_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "pavanbd_dev"
+		},
+		"ls_fusion_input_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsfusiondev.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
@@ -3711,6 +3715,29 @@
 						},
 						"secretName": "key-valut-adf",
 						"secretVersion": "fb2e8c43e5be40d7975a9bf22d16f294"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADF_key_valut')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_fusion_input')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('ls_fusion_input_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ADF_key_valut",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "secret-adls-fusion-dev"
 					}
 				}
 			},
