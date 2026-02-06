@@ -59,11 +59,11 @@
 			"type": "string",
 			"defaultValue": "pavanbd_dev"
 		},
-		"ls_fusion_input_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://adlsfusiondev.dfs.core.windows.net/"
-		},
 		"ls_fusion_dev_adls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().adls_url}"
+		},
+		"ls_fusion_input_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsfusiondev.dfs.core.windows.net/"
 		}
@@ -715,21 +715,34 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls_fusion_input')]",
+			"name": "[concat(parameters('factoryName'), '/ls_fusion_dev_adls')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"parameters": {
+					"adls_url": {
+						"type": "string",
+						"defaultValue": "https://adlsfusiondev.dfs.core.windows.net/"
+					},
+					"kv_adls_fusion": {
+						"type": "string",
+						"defaultValue": "secret-adls-fusion-dev"
+					}
+				},
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('ls_fusion_input_properties_typeProperties_url')]",
+					"url": "[parameters('ls_fusion_dev_adls_properties_typeProperties_url')]",
 					"accountKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
 							"referenceName": "ADF_key_valut",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "secret-adls-fusion-dev"
+						"secretName": {
+							"value": "@linkedService().kv_adls_fusion",
+							"type": "Expression"
+						}
 					}
 				}
 			},
@@ -738,14 +751,14 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls_fusion_dev_adls')]",
+			"name": "[concat(parameters('factoryName'), '/ls_fusion_input')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('ls_fusion_dev_adls_properties_typeProperties_url')]",
+					"url": "[parameters('ls_fusion_input_properties_typeProperties_url')]",
 					"accountKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
