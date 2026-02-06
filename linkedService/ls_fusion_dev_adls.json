@@ -1,17 +1,30 @@
 {
 	"name": "ls_fusion_dev_adls",
 	"properties": {
+		"parameters": {
+			"adls_url": {
+				"type": "string",
+				"defaultValue": "https://adlsfusiondev.dfs.core.windows.net/"
+			},
+			"kv_adls_fusion": {
+				"type": "string",
+				"defaultValue": "secret-adls-fusion-dev"
+			}
+		},
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
-			"url": "https://adlsfusiondev.dfs.core.windows.net/",
+			"url": "@{linkedService().adls_url}",
 			"accountKey": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
 					"referenceName": "ADF_key_valut",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "secret-adls-fusion-dev"
+				"secretName": {
+					"value": "@linkedService().kv_adls_fusion",
+					"type": "Expression"
+				}
 			}
 		}
 	}
