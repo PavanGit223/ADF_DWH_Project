@@ -18,11 +18,16 @@
 				"parameters{",
 				"     p_wh_update_dt as string (\"select * from pre_stg_department_data where Location_id = 1700 union select * from Pre_stg_Department_data where location_id = 1800\")",
 				"}",
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          pipeline_name as string,",
+				"          Flag as string,",
+				"          starttime as timestamp,",
+				"          endtime as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: (toString(\"select * from Pre_stg_Department_data\")),",
-				"     format: 'query') ~> source1"
+				"     format: 'table') ~> source1"
 			]
 		}
 	}

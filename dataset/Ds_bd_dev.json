@@ -7,7 +7,26 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "pipeline_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Flag",
+				"type": "varchar"
+			},
+			{
+				"name": "starttime",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "endtime",
+				"type": "datetime2",
+				"scale": 7
+			}
+		],
 		"typeProperties": {
 			"schema": "dbo",
 			"table": "ETL_LOG1"
