@@ -29,7 +29,7 @@
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: (select * from pre_stg_department_data\\nwhere Location_id = 1700\\nand wh_updated_date <= CONVERT(DATETIMEOFFSET, $p_wh_update_dt, 127)\\n\\nunion\\n\\nselect * from Pre_stg_Department_data\\nwhere location_id =1800\\nand wh_updated_date <= CONVERT(DATETIMEOFFSET, $p_wh_update_dt, 127)),",
+				"     query: (\"select * from pre_stg_department_data where 1=1 and wh_updated_date <= '{$p_wh_update_dt}' union select * from Pre_stg_Department_data where location_id =1800\"),",
 				"     format: 'query') ~> source1",
 				"source1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
