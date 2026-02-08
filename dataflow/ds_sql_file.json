@@ -16,18 +16,20 @@
 			"transformations": [],
 			"scriptLines": [
 				"parameters{",
-				"     p_wh_update_dt as string (\"select * from pre_stg_department_data where Location_id = 1700 union select * from Pre_stg_Department_data where location_id = 1800\")",
+				"     p_wh_updated_Date as string",
 				"}",
 				"source(output(",
-				"          pipeline_name as string,",
-				"          Flag as string,",
-				"          starttime as timestamp,",
-				"          endtime as timestamp",
+				"          DEPARTMENT_ID as string,",
+				"          DEPARTMENT_NAME as string,",
+				"          MANAGER_ID as string,",
+				"          LOCATION_ID as string,",
+				"          wh_updated_date as timestamp",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> source1"
+				"     query: ('select * from pre_stg_department_data where Location_id = 1700 and wh_updated_date <= convert(datetimeoffset,'+$p_wh_updated_Date+',127)'),",
+				"     format: 'query') ~> source1"
 			]
 		}
 	}
