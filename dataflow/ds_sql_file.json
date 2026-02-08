@@ -1,0 +1,41 @@
+{
+	"name": "ds_sql_file",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_bd_dev_p",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_input_dwh",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"parameters{",
+				"     p_wh_update_dt as string",
+				"}",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     query: (select * from pre_stg_department_data\\nwhere Location_id = 1700\\nand wh_updated_date <= CONVERT(DATETIMEOFFSET, $p_wh_update_dt, 127)\\n\\nunion\\n\\nselect * from Pre_stg_Department_data\\nwhere location_id =1800\\nand wh_updated_date <= CONVERT(DATETIMEOFFSET, $p_wh_update_dt, 127)),",
+				"     format: 'query') ~> source1",
+				"source1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}
