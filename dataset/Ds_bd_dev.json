@@ -1,0 +1,16 @@
+{
+	"name": "Ds_bd_dev",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azure_Dev_db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ETL_LOG1"
+		}
+	}
+}

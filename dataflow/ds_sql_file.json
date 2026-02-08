@@ -6,21 +6,13 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "DS_bd_dev_p",
+						"referenceName": "Ds_bd_dev",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
 				}
 			],
-			"sinks": [
-				{
-					"dataset": {
-						"referenceName": "DS_input_dwh",
-						"type": "DatasetReference"
-					},
-					"name": "sink1"
-				}
-			],
+			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
 				"parameters{",
@@ -29,12 +21,8 @@
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: 'select * from pre_stg_department_data\\nwhere Location_id = 1700\\nand wh_updated_date <= CURRENT_TIMESTAMP\\n\\nunion\\n\\nselect * from Pre_stg_Department_data\\nwhere location_id =1800',",
-				"     format: 'query') ~> source1",
-				"source1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     query: (toString(\"select * from Pre_stg_Department_data\")),",
+				"     format: 'query') ~> source1"
 			]
 		}
 	}

@@ -86,9 +86,6 @@
 						"datasetParameters": {
 							"source1": {
 								"table_name": "aa"
-							},
-							"sink1": {
-								"File_name_fusion": "sql_output"
 							}
 						}
 					},
