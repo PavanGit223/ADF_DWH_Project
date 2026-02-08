@@ -49,7 +49,7 @@
 				"typeProperties": {
 					"variableName": "v_wh_updated_dt",
 					"value": {
-						"value": "@formatDateTime(activity('Lookup1').output.firstRow.wh_updated_date,'yyyy-MM-ss HH:mm:ss')",
+						"value": "\\'@{formatDateTime(activity('Lookup1').output.firstRow.wh_updated_date,'yyyy-MM-ss HH:mm:ss')}\\'",
 						"type": "Expression"
 					}
 				}
@@ -78,14 +78,14 @@
 						"referenceName": "ds_sql_file",
 						"type": "DataFlowReference",
 						"parameters": {
-							"p_wh_update_dt": {
+							"p_wh_updated_Date": {
 								"value": "'@{variables('v_wh_updated_dt')}'",
 								"type": "Expression"
 							}
 						},
 						"datasetParameters": {
-							"source1": {
-								"table_name": "aa"
+							"sink1": {
+								"File_name_fusion": "sql_output"
 							}
 						}
 					},
