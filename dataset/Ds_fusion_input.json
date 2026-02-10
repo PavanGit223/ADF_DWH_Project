@@ -18,6 +18,9 @@
 		"parameters": {
 			"environment": {
 				"type": "string"
+			},
+			"FileName": {
+				"type": "String"
 			}
 		},
 		"annotations": [],
@@ -25,7 +28,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "employee_data_prod.csv",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
 				"fileSystem": "input-data-files"
 			},
 			"columnDelimiter": ",",
