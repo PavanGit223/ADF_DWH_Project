@@ -1,0 +1,107 @@
+{
+	"name": "pl_datefilter_dataflow",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "select CURRENT_TIMESTAMP as wh_updated_date",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_bd_dev_p",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_name": "aaa"
+						}
+					}
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "v_wh_updated_dt",
+					"value": {
+						"value": "\\'@{formatDateTime(activity('Lookup1').output.firstRow.wh_updated_date,'yyyy-MM-ss HH:mm:ss')}\\'",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "ds_sql_file",
+						"type": "DataFlowReference",
+						"parameters": {
+							"p_wh_updated_Date": {
+								"value": "'@{variables('v_wh_updated_dt')}'",
+								"type": "Expression"
+							}
+						},
+						"datasetParameters": {
+							"sink1": {
+								"File_name_fusion": "sql_output"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"variables": {
+			"v_wh_updated_dt": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
