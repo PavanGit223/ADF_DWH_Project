@@ -5,6 +5,11 @@
 			"referenceName": "azure_Dev_db",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"table_name": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
@@ -29,7 +34,10 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "ETL_LOG1"
+			"table": {
+				"value": "@dataset().table_name",
+				"type": "Expression"
+			}
 		}
 	}
 }
