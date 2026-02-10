@@ -36,11 +36,11 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: ('select * from pre_stg_department_data where Location_id = 1700 and wh_updated_date <= convert(datetimeoffset,'+$p_wh_updated_Date+',127) union select * from Pre_stg_Department_data where location_id =1800 and wh_updated_date <= convert(datetimeoffset,'+$p_wh_updated_Date+',127)'),",
+				"     query: ('select * from pre_stg_department_data where Location_id = 1700 and wh_updated_date <= '+$p_wh_updated_Date+'union all select * from Pre_stg_Department_data where location_id =1800 and wh_updated_date >='+$p_wh_updated_Date),",
 				"     format: 'query') ~> source1",
 				"source1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['sql_data'],",
+				"     partitionFileNames:['sql_data1'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     partitionBy('hash', 1)) ~> sink1"
