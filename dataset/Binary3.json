@@ -21,6 +21,9 @@
 				},
 				"folderPath": "zip-files",
 				"container": "dwh-input"
+			},
+			"compression": {
+				"type": "ZipDeflate"
 			}
 		}
 	}

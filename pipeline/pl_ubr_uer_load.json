@@ -187,7 +187,10 @@
 										"deleteFilesAfterCompletion": false
 									},
 									"formatSettings": {
-										"type": "BinaryReadSettings"
+										"type": "BinaryReadSettings",
+										"compressionProperties": {
+											"type": "ZipDeflateReadSettings"
+										}
 									}
 								},
 								"sink": {
@@ -217,7 +220,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"FileName": {
-											"value": "@concat(item().name,'.csv')",
+											"value": "@replace(item().name,'.zip' ,'.csv')",
 											"type": "Expression"
 										}
 									}
