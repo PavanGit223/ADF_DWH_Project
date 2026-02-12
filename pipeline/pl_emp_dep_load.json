@@ -5,6 +5,8 @@
 			{
 				"name": "Lookup1",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -43,6 +45,8 @@
 			{
 				"name": "Filter2",
 				"type": "Filter",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Lookup1",
@@ -66,6 +70,8 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Filter2",
@@ -254,7 +260,15 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "df_stg_emp_load",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"source1": {
+								"table_name": "None"
+							},
+							"sink1": {
+								"table_name": "stg_Employee_data"
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,
