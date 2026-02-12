@@ -1,0 +1,27 @@
+{
+	"name": "Binary3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_dwh",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"File_name": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().File_name",
+					"type": "Expression"
+				},
+				"folderPath": "zip-files",
+				"container": "dwh-input"
+			}
+		}
+	}
+}
