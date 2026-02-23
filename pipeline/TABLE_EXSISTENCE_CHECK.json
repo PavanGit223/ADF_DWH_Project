@@ -121,6 +121,80 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "Lookup3",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select list.TABLE_NAME from \n(select 'name' TABLE_NAME) list\nleft join \n(SELECT  top 2 * FROM \ninformation_schema.tables\nwhere table_schema= 'dbo') m\non m.TABLE_NAME = list.TABLE_NAME\nwhere m.table_name is null",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "Ds_bd_dev",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_name": "query"
+						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "If Condition2",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Lookup3",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@greater(length(activity('Lookup3').output.value),0)",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Fail1",
+							"type": "Fail",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"message": "there are some non exsisted tables",
+								"errorCode": "400"
+							}
+						}
+					]
+				}
 			}
 		],
 		"variables": {
