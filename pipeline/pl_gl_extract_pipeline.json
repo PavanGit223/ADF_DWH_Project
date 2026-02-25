@@ -129,7 +129,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select distinct employee_id from pre_stg_emp_data where employee_id in (100,200);\n",
+							"value": "select distinct employee_id from \npre_stg_emp_data where employee_id\n in (102,103);\n",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -148,6 +148,8 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Lookup2",
