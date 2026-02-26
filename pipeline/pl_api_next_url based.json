@@ -1,0 +1,230 @@
+{
+	"name": "pl_api_next_url based",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"paginationRules": {
+							"QueryParameters": "RANGE"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['name']"
+								},
+								"sink": {
+									"name": "name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['height']"
+								},
+								"sink": {
+									"name": "height"
+								}
+							},
+							{
+								"source": {
+									"path": "['mass']"
+								},
+								"sink": {
+									"name": "mass"
+								}
+							},
+							{
+								"source": {
+									"path": "['hair_color']"
+								},
+								"sink": {
+									"name": "hair_color"
+								}
+							},
+							{
+								"source": {
+									"path": "['skin_color']"
+								},
+								"sink": {
+									"name": "skin_color"
+								}
+							},
+							{
+								"source": {
+									"path": "['eye_color']"
+								},
+								"sink": {
+									"name": "eye_color"
+								}
+							},
+							{
+								"source": {
+									"path": "['birth_year']"
+								},
+								"sink": {
+									"name": "birth_year"
+								}
+							},
+							{
+								"source": {
+									"path": "['gender']"
+								},
+								"sink": {
+									"name": "gender"
+								}
+							},
+							{
+								"source": {
+									"path": "['homeworld']"
+								},
+								"sink": {
+									"name": "homeworld"
+								}
+							},
+							{
+								"source": {
+									"path": "['created']"
+								},
+								"sink": {
+									"name": "created"
+								}
+							},
+							{
+								"source": {
+									"path": "['edited']"
+								},
+								"sink": {
+									"name": "edited"
+								}
+							},
+							{
+								"source": {
+									"path": "['url']"
+								},
+								"sink": {
+									"name": "url"
+								}
+							},
+							{
+								"source": {
+									"path": "$['count']"
+								},
+								"sink": {
+									"name": "count",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['next']"
+								},
+								"sink": {
+									"name": "next",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['previous']"
+								},
+								"sink": {
+									"name": "previous",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['films'][0]"
+								},
+								"sink": {
+									"name": "results_films",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['species'][0]"
+								},
+								"sink": {
+									"name": "results_species",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['vehicles'][0]"
+								},
+								"sink": {
+									"name": "results_vehicles",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['starships'][0]"
+								},
+								"sink": {
+									"name": "results_starships",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "$['results']",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_swapi_api",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Ds_fusion_input",
+						"type": "DatasetReference",
+						"parameters": {
+							"environment": {
+								"value": "@pipeline().globalParameters.environment",
+								"type": "Expression"
+							},
+							"FileName": "swapi_data.csv"
+						}
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

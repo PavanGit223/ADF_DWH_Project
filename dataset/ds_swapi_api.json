@@ -1,0 +1,15 @@
+{
+	"name": "ds_swapi_api",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "swapi_dev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "api/people/"
+		},
+		"schema": []
+	}
+}
