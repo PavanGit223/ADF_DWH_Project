@@ -1,0 +1,57 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable1_copy1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "wh_updated_date",
+					"value": {
+						"value": "@convertTimeZone(utcNow(),'UTC','India Standard Time' )",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable1_copy1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "wh_update_date1",
+					"value": {
+						"value": "@convertFromUtc(utcNow(),'India Standard Time')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"wh_updated_date": {
+				"type": "String"
+			},
+			"wh_update_date1": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
