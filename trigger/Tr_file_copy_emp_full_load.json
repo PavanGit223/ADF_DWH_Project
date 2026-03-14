@@ -2,7 +2,7 @@
 	"name": "Tr_file_copy_emp_full_load",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipelines": [
 			{
 				"pipelineReference": {
