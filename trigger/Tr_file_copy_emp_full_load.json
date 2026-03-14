@@ -1,0 +1,25 @@
+{
+	"name": "Tr_file_copy_emp_full_load",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_file_copy",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 5,
+				"startTime": "2026-03-14T11:01:00",
+				"endTime": "2026-03-15T12:01:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}
